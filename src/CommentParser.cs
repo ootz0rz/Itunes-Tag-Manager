@@ -5,13 +5,17 @@ using System.Text;
 
 namespace iTunes_Tag_Manager
 {
-    class CommentParser
+    public class CommentParser
     {
         public static int ParserVersion { get { return 1; } }
-        public CommentData CommentData { get; set; }
 
-        protected string dataPre = "[[start]]";
-        protected string dataPost = "[[end]]";
+        public static string CommentDataPre { get { return dataPre; } }
+        public static string CommentDataPost { get { return dataPost; } }
+
+        protected static string dataPre = "//DO NOT EDIT THIS LINE OR BELOW\r\n[[start]]";
+        protected static string dataPost = "[[end]]\r\n//DO NOT EDIT THIS LINE OR ABOVE";
+
+        public CommentData CommentData { get; set; }
 
         public CommentParser(string comment)
         {

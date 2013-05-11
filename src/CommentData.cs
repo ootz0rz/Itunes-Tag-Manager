@@ -5,8 +5,11 @@ using System.Text;
 
 namespace iTunes_Tag_Manager
 {
-    class CommentData
+    public class CommentData
     {
-        public int Rating = 0;
+        /// <summary>
+        /// Range from [0, 100] inclusive
+        /// </summary>
+        public int Rating = -1;
     }
 }
