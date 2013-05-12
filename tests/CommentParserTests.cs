@@ -37,6 +37,7 @@ namespace tests
             Assert.AreEqual(pre, cp.PreData);
             Assert.AreEqual(post, cp.PostData);
             Assert.AreEqual(json, cp.JsonString);
+            Assert.AreEqual(pre + CommentParser.CommentDataPreKeyString + json + CommentParser.CommentDataPostKeyString + post, cp.ToString());
 
             Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
             Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
@@ -70,6 +71,7 @@ namespace tests
             Assert.AreEqual(pre, cp.PreData);
             Assert.AreEqual(post, cp.PostData);
             Assert.AreEqual(json, cp.JsonString);
+            Assert.AreEqual(pre + CommentParser.CommentDataPreKeyString + json + CommentParser.CommentDataPostKeyString + post, cp.ToString());
 
             Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
             Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
@@ -103,6 +105,7 @@ namespace tests
             Assert.AreEqual(pre, cp.PreData);
             Assert.AreEqual(post, cp.PostData);
             Assert.AreEqual(json, cp.JsonString);
+            Assert.AreEqual(pre + CommentParser.CommentDataPreKeyString + json + CommentParser.CommentDataPostKeyString + post, cp.ToString());
 
             Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
             Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
@@ -136,6 +139,7 @@ namespace tests
             Assert.AreEqual(pre, cp.PreData);
             Assert.AreEqual(post, cp.PostData);
             Assert.AreEqual(json, cp.JsonString);
+            Assert.AreEqual(pre + CommentParser.CommentDataPreKeyString + json + CommentParser.CommentDataPostKeyString + post, cp.ToString());
 
             Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
             Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
@@ -149,15 +153,22 @@ namespace tests
             CommentData cd = new CommentData();
             CommentParser cp = new CommentParser("");
 
+            string json = JsonConvert.SerializeObject(cd);
+            string pre = "";
+            string post = "";
+
             Assert.AreEqual(cd.Rating, cp.CommentData.Rating);
-            Assert.AreEqual("", cp.PreData);
-            Assert.AreEqual("", cp.PostData);
+            Assert.AreEqual(pre, cp.PreData);
+            Assert.AreEqual(post, cp.PostData);
             Assert.AreEqual("", cp.JsonString);
+            Assert.AreEqual(pre + CommentParser.CommentDataPreKeyString + json + CommentParser.CommentDataPostKeyString + post, cp.ToString());
+            Assert.AreEqual(json, cp.JsonString);
 
             Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
             Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
             Console.WriteLine(string.Format("PRE: {0}", cp.PreData));
             Console.WriteLine(string.Format("POST: {0}", cp.PostData));
+            Console.WriteLine(string.Format("FINAL COMMENT OUT:" + Environment.NewLine + "{0}", cp.ToString()));
         }
 
         [TestMethod]
@@ -175,9 +186,14 @@ namespace tests
             CommentData cd = new CommentData();
             CommentParser cp = new CommentParser(testComment);
 
+            string json = JsonConvert.SerializeObject(cd);
+
             Assert.AreEqual(cd.Rating, cp.CommentData.Rating);
             Assert.AreEqual(pre, cp.PreData);
             Assert.AreEqual(post, cp.PostData);
+            Assert.AreEqual("", cp.JsonString);
+            Assert.AreEqual(pre + CommentParser.CommentDataPreKeyString + json + CommentParser.CommentDataPostKeyString + post, cp.ToString());
+            Assert.AreEqual(json, cp.JsonString);
 
             Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
             Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));

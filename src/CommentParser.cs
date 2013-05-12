@@ -106,11 +106,14 @@ namespace iTunes_Tag_Manager
         }
 
         /// <summary>
-        /// Save any changes made to CommentData back to the song
+        /// Return the final compiled comment string
         /// </summary>
-        public void Save()
+        public override string ToString()
         {
-            
+            string json = JsonConvert.SerializeObject(CommentData);
+            _jsonString = json;
+
+            return PreData + CommentDataPreKeyString + JsonString + CommentDataPostKeyString + PostData;
         }
     }
 }
