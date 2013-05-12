@@ -93,14 +93,6 @@ namespace iTunes_Tag_Manager
                 }
                 else
                 {
-                    /*
-                     *  "pre json post"
-                     *  
-                     * start = pre.start + pre.length
-                     * 
-                     * post.start - start
-                     * */
-
                     _preData = comment.Substring(0, startPre);
                     _postData = comment.Substring(startPost + CommentDataPostKeyString.Length);
                     _jsonString = comment.Substring(
