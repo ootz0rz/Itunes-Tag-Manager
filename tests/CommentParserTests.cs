@@ -142,5 +142,47 @@ namespace tests
             Console.WriteLine(string.Format("PRE: {0}", cp.PreData));
             Console.WriteLine(string.Format("POST: {0}", cp.PostData));
         }
+
+        [TestMethod]
+        public void Comment_Empty()
+        {
+            CommentData cd = new CommentData();
+            CommentParser cp = new CommentParser("");
+
+            Assert.AreEqual(cd.Rating, cp.CommentData.Rating);
+            Assert.AreEqual("", cp.PreData);
+            Assert.AreEqual("", cp.PostData);
+            Assert.AreEqual("", cp.JsonString);
+
+            Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
+            Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
+            Console.WriteLine(string.Format("PRE: {0}", cp.PreData));
+            Console.WriteLine(string.Format("POST: {0}", cp.PostData));
+        }
+
+        [TestMethod]
+        public void Comment_With_No_JSON_Data()
+        {
+            string pre = "stuff before\n" + "\nstuff after";
+            string post = "";
+
+            string testComment = string.Format("{0}{1}", pre, post);
+
+            Console.WriteLine("TEST DATA:");
+            Console.WriteLine(string.Format("PRE: {0}", pre));
+            Console.WriteLine(string.Format("POST: {0}", post));
+
+            CommentData cd = new CommentData();
+            CommentParser cp = new CommentParser(testComment);
+
+            Assert.AreEqual(cd.Rating, cp.CommentData.Rating);
+            Assert.AreEqual(pre, cp.PreData);
+            Assert.AreEqual(post, cp.PostData);
+
+            Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
+            Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
+            Console.WriteLine(string.Format("PRE: {0}", cp.PreData));
+            Console.WriteLine(string.Format("POST: {0}", cp.PostData));
+        }
     }
 }

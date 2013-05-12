@@ -70,30 +70,47 @@ namespace iTunes_Tag_Manager
         /// </summary>
         protected string _jsonString = "";
 
+        /// <summary>
+        /// take the comment, find the json data if any, and create an instance
+        /// of CommentData for it
+        /// </summary>
+        /// <param name="comment"></param>
         public CommentParser(string comment)
         {
-            // take the comment, find the json data if any, and create an
-            // instance of CommentData for it
+            if (comment.Length == 0)
+            {
+                _commentData = new CommentData();
+            }
+            else
+            {
+                int startPre = comment.IndexOf(CommentDataPreKeyString);
+                int startPost = comment.IndexOf(CommentDataPostKeyString);
 
-            int startPre = comment.IndexOf(CommentDataPreKeyString);
-            int startPost = comment.IndexOf(CommentDataPostKeyString);
+                if (startPre == -1 || startPost == -1)
+                {
+                    _preData = comment;
+                    _commentData = new CommentData();
+                }
+                else
+                {
+                    /*
+                     *  "pre json post"
+                     *  
+                     * start = pre.start + pre.length
+                     * 
+                     * post.start - start
+                     * */
 
-            /*
-             *  "pre json post"
-             *  
-             * start = pre.start + pre.length
-             * 
-             * post.start - start
-             * */
+                    _preData = comment.Substring(0, startPre);
+                    _postData = comment.Substring(startPost + CommentDataPostKeyString.Length);
+                    _jsonString = comment.Substring(
+                        startPre + CommentDataPreKeyString.Length
+                        , startPost - (startPre + CommentDataPreKeyString.Length)
+                    );
 
-            _preData = comment.Substring(0, startPre);
-            _postData = comment.Substring(startPost + CommentDataPostKeyString.Length);
-            _jsonString = comment.Substring(
-                startPre + CommentDataPreKeyString.Length
-                , startPost - (startPre + CommentDataPreKeyString.Length)
-            );
-
-            _commentData = JsonConvert.DeserializeObject<CommentData>(_jsonString);
+                    _commentData = JsonConvert.DeserializeObject<CommentData>(_jsonString);
+                }
+            }
         }
 
         /// <summary>
