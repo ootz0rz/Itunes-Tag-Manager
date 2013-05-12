@@ -199,6 +199,7 @@ namespace tests
             Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
             Console.WriteLine(string.Format("PRE: {0}", cp.PreData));
             Console.WriteLine(string.Format("POST: {0}", cp.PostData));
+            Console.WriteLine(string.Format("FINAL COMMENT OUT:" + Environment.NewLine + "{0}", cp.ToString()));
         }
     }
 }

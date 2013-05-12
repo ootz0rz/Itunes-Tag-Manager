@@ -11,5 +11,10 @@ namespace iTunes_Tag_Manager
         /// Range from [0, 100] inclusive
         /// </summary>
         public int Rating = -1;
+
+        /// <summary>
+        /// Tags for this comment
+        /// </summary>
+        public IEnumerable<string> Tags = new List<string>();
     }
 }
