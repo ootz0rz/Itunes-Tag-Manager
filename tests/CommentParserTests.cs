@@ -21,16 +21,34 @@ namespace tests
 
             string json = JsonConvert.SerializeObject(cd);
 
+            string pre = "stuff before\n";
+            string post = "\nstuff after";
+
             string testComment = string.Format(
-                "stuff before\n{0}{1}{2}\nstuff after"
-                , CommentParser.CommentDataPre
+                "{0}{1}{2}{3}{4}"
+                , pre
+                , CommentParser.CommentDataPreKeyString
                 , json
-                , CommentParser.CommentDataPost
+                , CommentParser.CommentDataPostKeyString
+                , post
             );
+
+            Console.WriteLine("TEST DATA:");
+            Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", json));
+            Console.WriteLine(string.Format("PRE: {0}", pre));
+            Console.WriteLine(string.Format("POST: {0}", post));
 
             CommentParser cp = new CommentParser(testComment);
 
-            Assert.Equals(cp.CommentData.Rating, cd.Rating);
+            Assert.AreEqual(cd.Rating, cp.CommentData.Rating);
+            Assert.AreEqual(pre, cp.PreData);
+            Assert.AreEqual(post, cp.PostData);
+            Assert.AreEqual(json, cp.JsonString);
+
+            Console.WriteLine(Environment.NewLine + Environment.NewLine + "ACTUAL DATA:");
+            Console.WriteLine(string.Format("JSON:" + Environment.NewLine + "{0}", cp.JsonString));
+            Console.WriteLine(string.Format("PRE: {0}", cp.PreData));
+            Console.WriteLine(string.Format("POST: {0}", cp.PostData));
         }
     }
 }
